@@ -1,0 +1,30 @@
+/************************************
+
+        SET THE CUSTOM SCROLL BAR HERE
+		
+	.scroller: refers to the moving part
+	.customScroll: refers to the container
+	
+	WARNING 1: DO NOT CHANGE THE position ON BOTH ELEMENTS
+	WARNING 2: A transition ALREADY EXISTS THROUGH THE JS FILE. PLEASE CHANGE THE SOURCE CODE TO SET A NEW transition VALUE
+
+************************************/
+
+::-webkit-scrollbar
+{  
+	display: none;
+}
+
+.scroller{
+	border-radius: 10px;
+	background: rgba(0,0,0,.65);
+}
+
+.customScroll{
+	width: 10px;
+	background: rgba(0,0,0,.15);
+}
+
+.scroller:hover{
+	opacity: .8;
+}

@@ -7,3 +7,5 @@ A user-friendly and easy-to-use script to get rid of the default browser scroll 
 3. Customize the CSS the way you want to (more example available on the official website)
 4. Enjoy!
 
+#Example
+Example available here: http://www.bit.ly/22IVPJ6

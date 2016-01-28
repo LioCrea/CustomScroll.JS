@@ -18,7 +18,8 @@
 	//
 	// Issue/Bug? Contact lio@liototo.com or go on Github: https://github.com/LioCrea
 	//
-		
+	
+	if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {	
 			var isFirefox = typeof InstallTrigger !== 'undefined'; 
 			if(isFirefox)
 				alert('This plugin doesn\'t work well under Firefox');
@@ -113,7 +114,7 @@
 			// run function on scroll
 			window.addEventListener("scroll", onScroll,true);
 			customScroll.addEventListener("click", onClick,false);
-		
+	}	
 
 		//
 		//

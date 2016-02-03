@@ -5,9 +5,12 @@ No jQuery, pur JS
 
 # Setup
 1. Download the file and save it on the targeted folder
-2. Call the script and the default customScroll design sheet customScroll.CSS
+2. Call the script and the default customScroll design sheet customScroll.css
 3. Customize the CSS the way you want to (more example available on the official website)
 4. Enjoy!
 
 #Example
 Example available here: http://www.bit.ly/22IVPJ6
+
+#Note
+Doesn't work for Edge. Still have to work a little bit to fix it!

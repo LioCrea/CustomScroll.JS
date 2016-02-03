@@ -13,4 +13,4 @@ No jQuery, pur JS
 Example available here: http://www.bit.ly/22IVPJ6
 
 #Note
-Doesn't work for Edge. Still have to work a little bit to fix it!
+Doesn't work if using Edge's browser. Still have to work a little bit to fix it!

@@ -5,8 +5,11 @@ No jQuery, pur JS
 
 # Setup
 1.Copy/Paste the .js script
+
 2. Call the script and the default customScroll design sheet customScroll.css
+
 3. Customize the CSS the way you want to (more example available on the official website)
+
 4. Enjoy!
 
 # Some Extra

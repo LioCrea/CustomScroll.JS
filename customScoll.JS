@@ -111,45 +111,50 @@
 				console.log('NewTop: '+newHeight);
 			}
 			
-			// provisory sliding version using jQuery
 			function onMouse(){
 				myBody.style.webkitUserSelect = 'none';
 				myBody.style.webkitTouchCallout = 'none';
 				myBody.style.khtmlUserSelect = 'none';
 				myBody.style.mozUserSelect = 'none';
 				myBody.style.msUserSelect = 'none';
-				myBody.style.userSelect = 'none';				
-				var $el = $('.scroller');
+				myBody.style.userSelect = 'none';
+				var el = document.getElementsByClassName('scroller')[0];
+				var parent = document.getElementsByClassName('customScroll')[0];
 				var dragging = false;
 				var startY = 0;
 				var startT = 0;
-				$el.mousedown(function(ev) {
+						console.log('top/down: '+el.style.marginTop);
+				window.onmousedown = function(ev) {
+				console.log('WORKING');
 					dragging = true;
 					startY = ev.clientY;
-					startT = $el.css('margin-top');
-				});
-				$(window).mousemove(function(ev) {
+					startT = el.style.marginTop;
+					console.log('top/down2: '+startT);
+				};
+				window.onmousemove = function(ev) {
 					if (dragging){
 						myBody.scrollTop = ev.clientY*onLoadFactor; 
-						console.log('top: '+$el.css('margin-top'));
+						console.log('top: '+startT);
 						// calculate new top
-						var newSlide = parseInt(startT) + (ev.clientY - startY);
-						console.log('Mouse Position:  '+ev.clientY+'px // Element Position: '+$el.css('margin-top'));
+						var newSlide = parseInt(startT,10) + (ev.clientY - startY);
+						console.log('Mouse Position:  '+ev.clientY+'px // Element Position: '+el);
 						//stay in parent
-						var maxSlide =  $el.parent().height()-$el.height();          
+						var maxSlide =  parent.offsetHeight-el.offsetHeight;   
+						
 						newSlide = newSlide<0?0:newSlide>maxSlide?maxSlide:newSlide;
-						$el.css('margin-top', newSlide );
+						el.style.MarginTop = newSlide+'px';
 					}
-				}).mouseup(function() {
+				}
+				window.onmouseup = function() {
 					dragging = false;
-				});
-			}			
-			
-			// run function on scroll
-			window.addEventListener("scroll", onScroll,true);
-			customScroll.addEventListener("click", onClick,false);
-			scroller.addEventListener("mousedown", onMouse,true);
-	}	
+				};
+					}			
+					
+					// run function on scroll
+					window.addEventListener("scroll", onScroll,true);
+					customScroll.addEventListener("click", onClick,false);
+					scroller.addEventListener("mousedown", onMouse,true);
+			}	
 
 		//
 		//

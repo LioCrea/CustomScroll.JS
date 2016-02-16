@@ -113,6 +113,12 @@
 			
 			// provisory sliding version using jQuery
 			function onMouse(){
+				myBody.style.webkitUserSelect = 'none';
+				myBody.style.webkitTouchCallout = 'none';
+				myBody.style.khtmlUserSelect = 'none';
+				myBody.style.mozUserSelect = 'none';
+				myBody.style.msUserSelect = 'none';
+				myBody.style.userSelect = 'none';				
 				var $el = $('.scroller');
 				var dragging = false;
 				var startY = 0;

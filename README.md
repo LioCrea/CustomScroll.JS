@@ -19,5 +19,7 @@ Example available here: http://www.bit.ly/22IVPJ6
 
 #Note
 Chrome only plugin! But it worth it!
+
 Doesn't work if using Edge or Firefox browsers. 
+
 Still have to work a little bit to fix it!

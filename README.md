@@ -18,5 +18,5 @@ If you know some CSS basics, easy to create a full customized slider, from scrat
 Example available here: http://www.bit.ly/22IVPJ6
 
 #Note
-Doesn't work if using Edge's browser. 
+Doesn't work if using Edge or Firefox browsers. 
 Still have to work a little bit to fix it!

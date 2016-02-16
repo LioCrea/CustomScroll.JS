@@ -19,7 +19,7 @@
 	// Issue/Bug? Contact lio@liototo.com or go on Github: https://github.com/LioCrea
 	//
 	
-	if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {	
+	if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {	// disable plugin if mobile
 			var isFirefox = typeof InstallTrigger !== 'undefined'; 
 			if(isFirefox)
 				alert('This plugin doesn\'t work well under Firefox');
@@ -111,9 +111,38 @@
 				console.log('NewTop: '+newHeight);
 			}
 			
+			// provisory sliding version using jQuery
+			function onMouse(){
+				var $el = $('.scroller');
+				var dragging = false;
+				var startY = 0;
+				var startT = 0;
+				$el.mousedown(function(ev) {
+					dragging = true;
+					startY = ev.clientY;
+					startT = $el.css('margin-top');
+				});
+				$(window).mousemove(function(ev) {
+					if (dragging){
+						myBody.scrollTop = ev.clientY*onLoadFactor; 
+						console.log('top: '+$el.css('margin-top'));
+						// calculate new top
+						var newSlide = parseInt(startT) + (ev.clientY - startY);
+						console.log('Mouse Position:  '+ev.clientY+'px // Element Position: '+$el.css('margin-top'));
+						//stay in parent
+						var maxSlide =  $el.parent().height()-$el.height();          
+						newSlide = newSlide<0?0:newSlide>maxSlide?maxSlide:newSlide;
+						$el.css('margin-top', newSlide );
+					}
+				}).mouseup(function() {
+					dragging = false;
+				});
+			}			
+			
 			// run function on scroll
 			window.addEventListener("scroll", onScroll,true);
 			customScroll.addEventListener("click", onClick,false);
+			scroller.addEventListener("mousedown", onMouse,true);
 	}	
 
 		//

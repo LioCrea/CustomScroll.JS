@@ -5,13 +5,13 @@ No jQuery, pur JS
 
 # Setup
 
-1.Copy/Paste the .js script 
+- Copy/Paste the .js script 
 
-2. Call the script and the default customScroll design sheet customScroll.css
+- Call the script and the default customScroll design sheet customScroll.css
 
-3. Customize the CSS the way you want to (more example available on the example page)
+- Customize the CSS the way you want to (more example available on the example page)
 
-4. Enjoy!
+- Enjoy!
 
 # Some Extra
 Easy to set up for dragging windows and other small part of a DOM.

@@ -12,7 +12,9 @@ No jQuery, pur JS
 # Some Extra
 Easy to set up for dragging windows and other small part of a DOM.
 
-If you know some CSS basics, easy to create a full customized slider, from scratch :) Just follow the example CSS file!
+If you know some CSS basics, it will be very easy to create a full customized slider, from scratch :) 
+
+Just follow the example CSS file!
 
 #Example
 Example available here: http://www.bit.ly/22IVPJ6

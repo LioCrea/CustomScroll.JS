@@ -3,7 +3,7 @@
 	// FOR NON COMMERCIAL USE ONLY!
 	//
 	//
-	// V1.1 - Creator: Liototo / www.lioCrea.com
+	// V1.1 - Creator: Liocrea / www.liocrea.com
 	//
 	//
 	// HOW TO USE THIS PLUGIN:

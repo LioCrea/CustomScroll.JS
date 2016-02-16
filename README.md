@@ -4,9 +4,9 @@ A user-friendly and easy-to-use script to get rid of the default browser scroll 
 No jQuery, pur JS
 
 # Setup
-1.Copy/Paste the .js script
+1.Copy/Paste the .js script 
 2. Call the script and the default customScroll design sheet customScroll.css
-3. Customize the CSS the way you want to (more example available on the official website)
+3. Customize the CSS the way you want to (more example available on the example page)
 4. Enjoy!
 
 # Some Extra

@@ -21,7 +21,7 @@ If you know some CSS basics, it will be very easy to create a full customized sl
 Just follow the example CSS file!
 
 #Example
-Example available here: http://www.bit.ly/22IVPJ6
+Example available here: http://bit.ly/1omUbNo
 
 #Note
 Chrome only plugin! But it worth it!

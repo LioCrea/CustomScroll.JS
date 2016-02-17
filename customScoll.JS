@@ -118,42 +118,30 @@
 				myBody.style.mozUserSelect = 'none';
 				myBody.style.msUserSelect = 'none';
 				myBody.style.userSelect = 'none';
-				var el = document.getElementsByClassName('scroller')[0];
-				var parent = document.getElementsByClassName('customScroll')[0];
+				var $el = $('.scroller');
 				var dragging = false;
 				var startY = 0;
 				var startT = 0;
-						console.log('top/down: '+el.style.marginTop);
-				window.onmousedown = function(ev) {
-				console.log('WORKING');
+				$el.mousedown(function(ev) {
 					dragging = true;
 					startY = ev.clientY;
-					startT = el.style.marginTop;
-					console.log('top/down2: '+startT);
-				};
-				window.onmousemove = function(ev) {
+					startT = $el.css('margin-top');
+				});
+				$(window).mousemove(function(ev) {
 					if (dragging){
 						myBody.scrollTop = ev.clientY*onLoadFactor; 
-						console.log('top: '+startT);
+						console.log('top: '+$el.css('margin-top'));
 						// calculate new top
-						var newSlide = parseInt(startT,10) + (ev.clientY - startY);
-						console.log('Mouse Position:  '+ev.clientY+'px // Element Position: '+el);
+						var newSlide = parseInt(startT) + (ev.clientY - startY);
+						console.log('Mouse Position:  '+ev.clientY+'px // Element Position: '+$el.css('margin-top'));
 						//stay in parent
-						var maxSlide =  parent.offsetHeight-el.offsetHeight;   
-						
+						var maxSlide =  $el.parent().height()-$el.height();          
 						newSlide = newSlide<0?0:newSlide>maxSlide?maxSlide:newSlide;
-						el.style.MarginTop = newSlide+'px';
+						$el.css('margin-top', newSlide );
 					}
-				}
-				window.onmouseup = function() {
+				}).mouseup(function() {
 					dragging = false;
-				};
-					}			
-					
-					// run function on scroll
-					window.addEventListener("scroll", onScroll,true);
-					customScroll.addEventListener("click", onClick,false);
-					scroller.addEventListener("mousedown", onMouse,true);
+				});
 			}	
 
 		//

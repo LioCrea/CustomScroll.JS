@@ -24,125 +24,115 @@
 			if(isFirefox)
 				alert('This plugin doesn\'t work well under Firefox');
 
-				// create #wrapper
-				var allContent = document.getElementById('content');
-				var parent = allContent.parentNode;
-				var creaWrapper = document.createElement('div');
-				creaWrapper.setAttribute('id' , 'wrapper');
-				parent.replaceChild(creaWrapper, allContent);
-				creaWrapper.appendChild(allContent);
-				var setScrollColor, setScrollBackColor;
-				setScrollColor = allContent.getAttribute('scrollerColor');
-				setScrollBackColor = allContent.getAttribute('scrollBackColor');
+var allContent = document.getElementById('content'); 
+var parent = allContent.parentNode; 
+var creaWrapper = document.createElement('div'); 
+creaWrapper.setAttribute('id' , 'wrapper'); 
+parent.replaceChild(creaWrapper, allContent); 
+creaWrapper.appendChild(allContent); 
+var setScrollColor, setScrollBackColor; 
+setScrollColor = allContent.getAttribute('scrollerColor'); 
+setScrollBackColor = allContent.getAttribute('scrollBackColor'); 
 
-				// dynamic body style
-				var myBody = document.body;
-				myBody.style.overflow = 'auto';
-				myBody.style.paddingRight = '10px';
-				myBody.style.msOverflowStyle='none';
-				
-				var div1 , div2;
-				// dynamic customScroll creation
-				div1 = document.createElement('div');
-				div1.setAttribute('class' , 'customScroll');
-				div1.style.position = 'fixed';
-				div1.style.zIndex = '10000!important';
-				div1.style.height = '100vh';
-				div1.style.top = '0';
-				div1.style.right = '0';
-				myBody.appendChild(div1);
-				
-				// dynamic scroller creation
-				var customScroll = document.getElementsByClassName('customScroll')[0];
-				div2 = document.createElement('div');
-				div2.setAttribute('class' , 'scroller');
-				div2.style.cursor = 'pointer';
-				div2.style.transition = '.15s';
-				customScroll.appendChild(div2);
-				
-				// minimum set of condition for #wrapper. DO NOT CHANGE
-				var wrap = document.getElementById('wrapper');
-				wrap.style.overflow = 'hidden';
-				
-			var customScrollHeight = customScroll.offsetHeight;
-			var scroller = document.getElementsByClassName('scroller')[0];
-			var scrollerHeight = scroller.offsetHeight;
-			var doc = document.getElementById('content');
-			var docHeight = doc.offsetHeight;
-			var onLoadFactor = docHeight/customScrollHeight;
-			var onLoadScrollerHeight = customScrollHeight/onLoadFactor+'px';
-			var rTScroll, rTScrollerPos, cursorPos, newHeight;
-			var dragging = false;
+var myBody = document.body; 
+myBody.style.msOverflowStyle='none'; 
+myBody.style.overflow = 'auto'; 
+myBody.style.paddingRight = '10px'; 
+
+var div1 , div2; 
+div1 = document.createElement('div'); 
+div1.setAttribute('class' , 'customScroll'); 
+div1.style.position = 'fixed'; 
+div1.style.zIndex = '10000!important'; 
+div1.style.height = '100vh'; 
+div1.style.top = '0'; 
+div1.style.right = '0'; 
+document.body.appendChild(div1); 
+
+var customScroll = document.getElementsByClassName('customScroll')[0]; 
+div2 = document.createElement('div'); 
+div2.setAttribute('class' , 'scroller'); 
+div2.style.cursor = 'pointer'; 					  
+customScroll.appendChild(div2); 
+
+var wrap = document.getElementById('wrapper'); 
+wrap.style.overflow = 'hidden'; 
+var customScrollHeight = customScroll.offsetHeight; 
+var scroller = document.getElementsByClassName('scroller')[0]; 
+var scrollerHeight = scroller.offsetHeight; 
+var doc = document.getElementById('content'); 
+var docHeight = doc.offsetHeight; 
+var onLoadFactor = docHeight/customScrollHeight; 
+var onLoadScrollerHeight = customScrollHeight/onLoadFactor+'px'; 
+
+var rTScroll, rTScrollerPos, cursorPos, newHeight; 
+var dragging = false; 
+scroller.style.height = onLoadScrollerHeight; 
+
+function onScroll(){ 
+	docHeight = doc.offsetHeight; 
+	onLoadFactor = docHeight/customScrollHeight; 
+	rTScroll = myBody.scrollTop; 
+	rTScrollerPos = rTScroll/onLoadFactor; 
+	scroller.style.marginTop = rTScrollerPos+'px';
+}
+ 
+function onClick(evt){ 
+	dragging = true; 
+	cursorPos = evt.clientY; 
+	scroller.style.top = cursorPos; 
+	newHeight = cursorPos; 
+	myBody.scrollTop = cursorPos*onLoadFactor; 
+	doc.scrollTop = cursorPos; 
+	console.log('cursor pos: '+cursorPos); 
+	console.log('ScrollerTopPos: '+scroller.offsetTop); 
+	console.log('NewTop: '+newHeight); 
+} 
+ 
+function onMouse(ev){
+	myBody.style.webkitUserSelect = 'none';
+	myBody.style.webkitTouchCallout = 'none';
+	myBody.style.khtmlUserSelect = 'none';
+	myBody.style.mozUserSelect = 'none';
+	myBody.style.msUserSelect = 'none';
+	myBody.style.userSelect = 'none';
+	var $el = $('.scroller');
+	var dragging = false; // drag it or not
+	var startY = 0;
+	var startT = 0;
+
+	dragging = true;
+	startY = ev.clientY;
+	startT = scroller.style.marginTop+'px';
+		
+	window.addEventListener("mousemove" , function(ev) {
+		if (dragging){
+			myBody.scrollTop = ev.clientY*onLoadFactor; 
 			
-			// allContent.style.height = docHeight+'px';
-			// myBody.style.height = docHeight+'px';
-			scroller.style.height = onLoadScrollerHeight;
-				console.log('content height: '+allContent.offsetHeight);
-				console.log('wrapper height: '+docHeight);
-				console.log('body height: '+myBody.offsetHeight);
-			// console.log('WindowSize: '+winHeight);
-			// console.log('ScrollerHeight: '+scrollerHeight);
-			// console.log('DocHeight: '+docHeight);
-			// console.log('CustomScrollHeight: '+customScrollHeight);
-			// console.log('OnLoadFactor: '+onLoadFactor);
-			// console.log('OnLoadScrollerHeight: '+onLoadScrollerHeight);
+			// calculate new top
+			var newSlide = parseInt(startT,10) + (ev.clientY - startY);
 			
-			function onScroll(){
-				docHeight = doc.offsetHeight; // compatibilite infinite scroll
-				onLoadFactor = docHeight/customScrollHeight; // compatibilite infinite scroll
-				rTScroll = myBody.scrollTop; // retrieve RT scroll position of wrap
-				rTScrollerPos = rTScroll/onLoadFactor; // calculate RT scroller position as a function of onLoadFactor
-				scroller.style.marginTop = rTScrollerPos+'px'; // update RT scroller position
-				// console.log('RTScroll: '+rTScrollerPos);
-				// console.log('wrapper position: '+wrap.scrollTop);
-				// console.log('body width: '+myBody.offsetHeight);
-				// console.log('content width: '+docHeight);
-			}
-			
-			function onClick(evt){
-			//	dragging = true;
-				cursorPos = evt.clientY;
-				scroller.style.top = cursorPos;
-				newHeight = cursorPos;
-				myBody.scrollTop = cursorPos*onLoadFactor; // retrieve doc position
-				doc.scrollTop = cursorPos;
-				console.log('cursor pos: '+cursorPos);
-				console.log('ScrollerTopPos: '+scroller.offsetTop);
-				console.log('NewTop: '+newHeight);
-			}
-			
-			function onMouse(){
-				myBody.style.webkitUserSelect = 'none';
-				myBody.style.webkitTouchCallout = 'none';
-				myBody.style.khtmlUserSelect = 'none';
-				myBody.style.mozUserSelect = 'none';
-				myBody.style.msUserSelect = 'none';
-				myBody.style.userSelect = 'none';
-				var $el = $('.scroller');
-				var dragging = false;
-				var startY = 0;
-				var startT = 0;
-				$el.mousedown(function(ev) {
-					dragging = true;
-					startY = ev.clientY;
-					startT = $el.css('margin-top');
-				});
-				$(window).mousemove(function(ev) {
-					if (dragging){
-						myBody.scrollTop = ev.clientY*onLoadFactor; 
-						console.log('top: '+$el.css('margin-top'));
-						// calculate new top
-						var newSlide = parseInt(startT) + (ev.clientY - startY);
-						console.log('Mouse Position:  '+ev.clientY+'px // Element Position: '+$el.css('margin-top'));
-						//stay in parent
-						var maxSlide =  $el.parent().height()-$el.height();          
-						newSlide = newSlide<0?0:newSlide>maxSlide?maxSlide:newSlide;
-						$el.css('margin-top', newSlide );
-					}
-				}).mouseup(function() {
-					dragging = false;
-				});
-			}	
+			//stay in parent
+			var maxSlide =  div1.offsetHeight-scroller.offsetHeight;          
+			newSlide = newSlide<0?0:newSlide>maxSlide?maxSlide:newSlide;
+			scroller.style.marginTop = newSlide +'px';
+		}
+	}, false)
+	
+	window.addEventListener("mouseup" , function() {
+		dragging = false;
+		myBody.style.webkitUserSelect = 'default';
+		myBody.style.webkitTouchCallout = 'default';
+		myBody.style.khtmlUserSelect = 'default';
+		myBody.style.mozUserSelect = 'default';
+		myBody.style.msUserSelect = 'default';
+		myBody.style.userSelect = 'default';		
+	}, false);
+}
+
+window.addEventListener("scroll", onScroll,true); 
+customScroll.addEventListener("click", onClick,false);
+scroller.addEventListener("mousedown", onMouse,true);
 
 		//
 		//
